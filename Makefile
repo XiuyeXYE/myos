@@ -1,6 +1,6 @@
-objects = loader.o mkernel.o
+objects = loader.o mkernel.o gdt.o port.o
 
-CPPPRAMS = -m32 -W -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore
+CPPPRAMS = -m32 -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore -fno-pie
 ASPRAMS = --32
 LDPRAMS = -m elf_i386 
 
@@ -31,6 +31,6 @@ mkernel.iso : mkernel.img
 	rm -rf iso
 	
 clean:
-	rm -rf ${objects} *.iso *.img
+	rm -rf ${objects} *.iso *.img a.out
 	
 	
