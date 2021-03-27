@@ -5,20 +5,9 @@
 #define screen_width 80
 #define screen_height 25
 
-extern "C" void clear_screen();
 
 
 extern "C" void print_char(u8 x,u8 y,char c){
-
-	if(x>=screen_width){
-		y++;
-		x=0;			
-	}
-	if(y>=screen_height){
-		clear_screen();	
-		x=0;
-		y=0;
-	}
 	
 	//wait x,y outcome ,then output str[i] !!!
 	//very important algorithm processs!!!
@@ -51,13 +40,23 @@ void printf(char *str){
 	//写入字符串，取或0xff00的意思是我们需要把屏幕高四位拉低，
 	//否则就是黑色的字体，黑色的字体黑色的屏幕是啥也看不到的
 	for(int i=0;str[i]!='\0';++i){
+		//fistly check letter
 		switch(str[i]){
 			case '\n':
 				y++;//checkout rows not output!!!
 				x=0;
 				break;
 			default:
-				
+				//firstly,check pos
+				if(x>=screen_width){
+					y++;
+					x=0;			
+				}
+				if(y>=screen_height){
+					clear_screen();	
+					x=0;
+					y=0;
+				}
 				//wait x,y outcome ,then output str[i] !!!
 				//very important algorithm processs!!!	
 				print_char(x,y,str[i]);
@@ -93,6 +92,10 @@ void kernel_main(void *multiboot_structure,unsigned int magicnumber){
 	printf("End");
 	
 	GlobalDescriptorTable gdt;
+	
+	//for(;;){
+	//	printf("C++ Operating System");
+	//}
 	
 	for(;;);// jmp here for ever	
 
