@@ -17,11 +17,11 @@ GlobalDescriptorTable::~GlobalDescriptorTable(){
 	
 }
 
-u16 GlobalDescriptorTable::DataSegmentDescriptor(){
+u16 GlobalDescriptorTable::DataSegmentSelector(){
 	return (u8*)&dataSegmentDescriptor-(u8*)this;
 }
 
-u16 GlobalDescriptorTable::CodeSegmentDescriptor(){
+u16 GlobalDescriptorTable::CodeSegmentSelector(){
 	return (u8*)&codeSegmentDescriptor-(u8*)this;
 }
 

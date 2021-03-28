@@ -29,8 +29,8 @@ public:
 	GlobalDescriptorTable();
 	~GlobalDescriptorTable();
 	
-	u16 CodeSegmentDescriptor();
-	u16 DataSegmentDescriptor();
+	u16 CodeSegmentSelector();
+	u16 DataSegmentSelector();
 
 };
 

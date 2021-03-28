@@ -7,35 +7,45 @@
 
 class InterruptManager{
 
-protected:
 
-	struct GateDescriptor{
-		u16 handleAddressLowBits;
-		u16 gdt_codeSegmentSelector;
-		u8 reserved;
-		u8 access;
-		u16 handleAddressHighBits;
-		
-	}__attribut__((packed));
-	
-	static GateDescriptor interruptDescriptorTable[256];
-	
-	static void SetInterruptDescriptorTableEntry(
-		u8 interruptNo,
-		u16 codeSegmentSelectorOffset,
-		void (*handler)();
-		u8 DescriptorPrivilegelLevel,
-		u8 DescriptorType
-		
-	
-	);
-	
-	
 	public:
 	
-	InterruptManager(GlobalDescriptorTable *gdt);
+	InterruptManager(u16 hardwareInterruptOffset,GlobalDescriptorTable *gdt);
 	~InterruptManager();
 	
+	protected:
+
+		struct GateDescriptor{
+			u16 handleAddressLowBits;
+			u16 gdt_codeSegmentSelector;
+			u8 reserved;
+			u8 access;
+			u16 handleAddressHighBits;
+			
+		}__attribute__((packed));
+		
+		static GateDescriptor interruptDescriptorTable[256];
+		
+		
+		struct InterruptDescriptorTablePointer{
+			u16 size;
+			u32 base;
+		}__attribute__((packed));
+		
+		
+		static void SetInterruptDescriptorTableEntry(
+			u8 interruptNo,
+			u16 codeSegmentSelectorOffset,
+			void (*handler)(),
+			u8 DescriptorPrivilegelLevel,
+			u8 DescriptorType
+		);
+		
+		u16 hardwareInterruptOffset;
+		
+		static void InterruptIgnore();
+		
+		
 		static u32 handleInterrupt(u8 interruptNo,u32 esp);
 		
 		static void HandleInterruptRequest0x00();
