@@ -20,21 +20,21 @@ extern "C" void system_constructors(){
 extern "C"
 void kernel_main(void *multiboot_structure,unsigned int magicnumber){
 
-	printf("Hello world\n");
-	printf("C++ Operating System\n");
-	printf("End");
-	
-	GlobalDescriptorTable gdt;
-	
-	InterruptManager interrupt(0x20,&gdt);
-	
-	interrupt.Activate();
-	
-	//for(;;){
-	//	printf("C++ Operating System");
-	//}
-	
-	for(;;);// jmp here for ever	
+    printf("Hello world\n");
+    printf("C++ Operating System\n");
+    printf("End");
+
+    GlobalDescriptorTable gdt;
+
+    InterruptManager interrupt(0x20, &gdt);
+
+    //interrupt.Activate();
+
+    //for(;;){
+    //	printf("C++ Operating System");
+    //}
+
+    for (;;);// jmp here for ever
 
 }
 
