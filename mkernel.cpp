@@ -1,5 +1,6 @@
 #include"printf.h"
 #include"gdt.h"
+#include"interrupt.h"
 
 
 //操作系统构造函数委托方法
@@ -24,6 +25,10 @@ void kernel_main(void *multiboot_structure,unsigned int magicnumber){
 	printf("End");
 	
 	GlobalDescriptorTable gdt;
+	
+	InterruptManager interrupt(0x20,&gdt);
+	
+	interrupt.Activate();
 	
 	//for(;;){
 	//	printf("C++ Operating System");

@@ -5,6 +5,22 @@
 #include"port.h"
 #include"gdt.h"
 
+class InterruptManager;
+
+class InterruptHandler{
+protected:
+	InterruptHandler(u8 intrruptNo,InterruptManager* interruptManager);
+	u8 interruptNo;
+	
+	InterruptManager* interruptManager;
+public:
+	~InterruptHandler();
+	
+	u32 handleInterrupt(u32 esp);
+	
+	
+};
+
 class InterruptManager{
 
 
@@ -13,7 +29,19 @@ class InterruptManager{
 	InterruptManager(u16 hardwareInterruptOffset,GlobalDescriptorTable *gdt);
 	~InterruptManager();
 	
+	void Activate();
+	void DeActivate();
+	
+	
+	
+	
 	protected:
+		
+		friend InterruptHandler;
+		
+		InterruptHandler* handlers[256];
+
+		static InterruptManager* ActiveInterruptManager;
 
 		struct GateDescriptor{
 			u16 handleAddressLowBits;
@@ -47,6 +75,8 @@ class InterruptManager{
 		
 		
 		static u32 handleInterrupt(u8 interruptNo,u32 esp);
+		
+		u32 DoHandleInterrupt(u8 interruptNo,u32 esp);
 		
 		static void HandleInterruptRequest0x00();
 		static void HandleInterruptRequest0x01();
@@ -87,7 +117,10 @@ class InterruptManager{
 		
 		static void HandleException0x31();
 		
-		
+		Port8BitSlow picMasterCommand;
+		Port8BitSlow picMasterData;
+		Port8BitSlow picSlaveCommand;
+		Port8BitSlow picSlaveData;
 
 };
 

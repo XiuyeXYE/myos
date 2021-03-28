@@ -1,6 +1,6 @@
 objects = loader.o mkernel.o printf.o gdt.o port.o interrupt.o interruptstub.o
 
-CPPPRAMS = -m32 -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore -fno-pie 
+CPPPRAMS = -m32 -W -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore -fno-pie 
 ASPRAMS = --32
 LDPRAMS = -m elf_i386 
 

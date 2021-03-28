@@ -18,11 +18,11 @@ GlobalDescriptorTable::~GlobalDescriptorTable(){
 }
 
 u16 GlobalDescriptorTable::DataSegmentSelector(){
-	return (u8*)&dataSegmentDescriptor-(u8*)this;
+	return ((u8*)&dataSegmentDescriptor-(u8*)this)<<3;
 }
 
 u16 GlobalDescriptorTable::CodeSegmentSelector(){
-	return (u8*)&codeSegmentDescriptor-(u8*)this;
+	return ((u8*)&codeSegmentDescriptor-(u8*)this)<<3;
 }
 
 GlobalDescriptorTable::SegmentDescriptor::SegmentDescriptor(u32 base,u32 limit,u8 type){
@@ -43,7 +43,7 @@ GlobalDescriptorTable::SegmentDescriptor::SegmentDescriptor(u32 base,u32 limit,u
 	
 	target[1] = (limit>>8)&0xff;
 	
-	target[6] = (limit>>16)&0xf;
+	target[6] |= (limit>>16)&0xf;
 	
 	
 	target[2] = base & 0xff;

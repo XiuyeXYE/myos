@@ -15,4 +15,6 @@ typedef double f64;
 
 typedef long double f128;
 
+#define NULL 0
+
 #endif 
