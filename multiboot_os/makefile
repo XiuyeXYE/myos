@@ -1,8 +1,8 @@
-objects = loader.o mkernel.o printf.o gdt.o port.o interrupt.o interruptstub.o
+objects = boot.o kernel.o printf.o
 
 CPPPRAMS = -m32 -W -fno-common -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore -fno-pie
 ASPRAMS = --32
-LDPRAMS = -m elf_i386 
+LDPRAMS = -m elf_i386
 
 %.o: %.cpp
 	g++ ${CPPPRAMS} -o $@ -c $<
@@ -10,23 +10,22 @@ LDPRAMS = -m elf_i386
 %.o: %.s
 	as ${ASPRAMS} -o $@ $<
 
-mkernel.img: linker.ld $(objects)
+kernel.img: linker.ld $(objects)
 	ld ${LDPRAMS} -T $< -o $@ ${objects}
 
-
-mkernel.iso : mkernel.img	
+kernel.iso : kernel.img	
 	mkdir iso
 	mkdir iso/boot
 	mkdir iso/boot/grub
 	
 	cp $< iso/boot/
-	#echo "kernel iso/boot/mkernel.img"
-	#echo "multiboot iso/boot/mkernel.img"
+	#echo "kernel iso/boot/kernel.img"
+	#echo "multiboot iso/boot/kernel.img"
 	echo "set timeout=0" > iso/boot/grub/grub.cfg
 	echo "set default=0" >> iso/boot/grub/grub.cfg
 	echo "" >> iso/boot/grub/grub.cfg
 	echo 'menuentry "my os" {'>> iso/boot/grub/grub.cfg
-	echo '	multiboot /boot/mkernel.img'>> iso/boot/grub/grub.cfg
+	echo '	multiboot /boot/kernel.img'>> iso/boot/grub/grub.cfg
 	echo '	boot'>> iso/boot/grub/grub.cfg
 	echo '}'>> iso/boot/grub/grub.cfg
 	grub-mkrescue -o $@ iso
@@ -34,5 +33,4 @@ mkernel.iso : mkernel.img
 	
 clean:
 	rm -rf *.o *.iso *.img a.out iso
-	
 	
