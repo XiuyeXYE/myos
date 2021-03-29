@@ -2,4 +2,6 @@
 a.out
 *.img
 *.iso
+.idea
 
+/for_check/.gradle/
