@@ -2,5 +2,10 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/How-to-Make-a-Computer-Operating-System" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/OS67" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/xv6-chinese" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/xv6-public" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/xv6-riscv" vcs="Git" />
   </component>
 </project>
