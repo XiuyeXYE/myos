@@ -14,7 +14,6 @@ void init_gdt_desc(u32 base, u32 limit, u8 acces, u8 other, struct gdt_desc *des
     desc->limit16_19 = (limit & 0xf0000) >> 16;
     desc->other = (other & 0xf);
     desc->base24_31 = (base & 0xff000000) >> 24;
-    return;
 }
 
 

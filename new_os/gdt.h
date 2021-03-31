@@ -44,10 +44,10 @@ struct tss {
     u16 gs, __gs_unused;
     u16 ldt_selector, __ldt_sel_unused;
     u16 debug_flag, io_map;
-} __attribute__ ((packed));
+} packed_it;
 
 
-void init_gdt(void);
+void init_gdt();
 
 #endif
 
