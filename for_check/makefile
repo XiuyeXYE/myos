@@ -1,7 +1,7 @@
 
 
-a.out : check_object_layout.cpp
-	g++ $< -o a.out
+a.out: check_reference.cpp
+	g++ -o $@ $<
 
 run: a.out
 	./a.out
