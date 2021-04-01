@@ -6,17 +6,17 @@ using namespace std;
 
 int main(){
 
-	sz(void);
-	
-	
-	sz(char);
-	sz(unsigned char);
-	sz(short);
-	sz(unsigned short);
-	sz(int);
-	sz(unsigned int);
-	sz(long);
-	sz(unsigned long);
+    sz(void);//warning !!!
+
+
+    sz(char);
+    sz(unsigned char);
+    sz(short);
+    sz(unsigned short);
+    sz(int);
+    sz(unsigned int);
+    sz(long);
+    sz(unsigned long);
 	sz(int long);
 	sz(unsigned int long);
 	sz(long long);
