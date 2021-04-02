@@ -15,7 +15,7 @@ all_run: *.out
 		./$$exe; \
 	done
 
-a.out: check_types.cpp
+a.out: check_template_temporary.cpp
 	g++ $<
 
 run: a.out
